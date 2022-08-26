@@ -9,6 +9,8 @@ const mobileMenu = document.querySelector('.mobile-menu');
 //carrito compras
 const menuCarritoIcon = document.querySelector('.navbar-shopping-cart');
 const aside = document.querySelector('.product-detail');
+//listado productos
+const cardsContainer = document.querySelector('.cards-container');
 
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
@@ -51,3 +53,119 @@ function toggleCarritoAside() {
 
     aside.classList.toggle('inactive');
 }
+
+//Listado de productos creamos un array y dentro metemos cada objeto
+const productList = [];
+productList.push({
+    name: 'Bike',
+    price: 120,
+    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+});
+
+productList.push({
+    name: 'Guitarra electrica',
+    price: 120,
+    image: 'https://images.pexels.com/photos/164774/pexels-photo-164774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+productList.push({
+    name: 'Arpa',
+    price: 120,
+    image: 'https://images.pexels.com/photos/12970722/pexels-photo-12970722.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+productList.push({
+    name: 'Flauta dulce',
+    price: 120,
+    image: 'https://images.pexels.com/photos/221563/pexels-photo-221563.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+productList.push({
+    name: 'Guitarra Electrica',
+    price: 120,
+    image: 'https://images.pexels.com/photos/9221756/pexels-photo-9221756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+productList.push({
+    name: 'Batería',
+    price: 120,
+    image: 'https://images.pexels.com/photos/9008741/pexels-photo-9008741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+productList.push({
+    name: 'Violín',
+    price: 120,
+    image: 'https://images.pexels.com/photos/34221/violin-musical-instrument-music-sound.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+productList.push({
+    name: 'Percusión menor',
+    price: 120,
+    image: 'https://images.pexels.com/photos/7285177/pexels-photo-7285177.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+productList.push({
+    name: 'Bateria y planta',
+    price: 120,
+    image: 'https://images.pexels.com/photos/9644665/pexels-photo-9644665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+});
+
+/*  
+<div class="product-card">
+        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <div class="product-info">
+          <div>
+            <p>$120,00</p>
+            <p>Bike</p>
+          </div>
+          <figure>
+            <img src="./icons/bt_add_to_cart.svg" alt="">
+          </figure>
+        </div>
+      </div>
+*/
+
+//recorremos todo el array (product es llave del array productList)
+function renderProducts(arr) {
+    for(product of arr ) { //arr seria el productList
+        //creamos desde js toda la tarjeta q esta en comentarios arriba para insertarlas en el html
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+    
+        const productImg = document.createElement('img');
+        //product = {name, price, img} -> product.image
+        productImg.setAttribute('src', product.image);
+    
+        const productInfo = document.createElement('div');
+        productInfo.classList.add('product-info');
+    
+        const productInfoDiv = document.createElement('div');
+    
+        const productPrice = document.createElement('p');
+        productPrice.innerText = '$' + product.price;
+        const productName = document.createElement('p');
+        productName.innerText = '$' + product.name;
+    
+        productInfoDiv.appendChild(productPrice);
+        productInfoDiv.appendChild(productName);
+    
+        const productInfoFigure = document.createElement('figure');
+        const productImgCart = document.createElement('img');
+        productImgCart.setAttribute('src', './icons/bt_add_to_cart.svg');
+    
+        //le ponemos hijos a los padres
+        productInfoFigure.appendChild(productImgCart);
+    
+        productInfo.appendChild(productInfoDiv);
+        productInfo.appendChild(productInfoFigure);
+    
+        productCard.appendChild(productImg);
+        productCard.appendChild(productInfo);
+    
+        cardsContainer.appendChild(productCard);
+    }
+}
+
+//llamamos la funcion poniendole como parametro el array con el q quiero trabajar
+renderProducts(productList);
+
